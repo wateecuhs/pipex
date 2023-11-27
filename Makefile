@@ -7,7 +7,7 @@ OBJS				=	$(patsubst %.c, $(DIR_BUILD)%.o, $(SRCS))
 OBJS_TEST			=	$(patsubst %.c, $(DIR_BUILD)%.o, $(TEST))
 DEPS				=	$(patsubst %.c, $(DIR_BUILD)%.d, $(SRCS))
 DEPS_FLAGS			=	-MMD -MP
-BASE_CFLAGS			=	-Wall -Wextra -Werror
+BASE_CFLAGS			=	-Wall -Wextra -Werror -fsanitize=address -g3
 BASE_DEBUG_CFLAGS	=	-g3
 DEBUG_CLFAGS		=	$(BASE_DEBUG_CFLAGS) -fsanitize=address
 # DEBUG_CLFAGS		=	$(BASE_DEBUG_CFLAGS) -fsanitize=memory -fsanitize-memory-track-origins
@@ -15,7 +15,7 @@ DEBUG_CLFAGS		=	$(BASE_DEBUG_CFLAGS) -fsanitize=address
 # FLAGS				=	$(BASE_CFLAGS) -g3
 # FLAGS				=	$(BASE_CFLAGS) $(BASE_DEBUG_CFLAGS)
 FLAGS				=	$(BASE_CFLAGS)
-# FLAGS			=	$(BASE_CFLAGS) $(DEBUG_CLFAGS)
+# FLAGS				=	$(BASE_CFLAGS) $(DEBUG_CLFAGS)
 # FLAGS				=	$(BASE_CFLAGS) $(DEBUG_CLFAGS)
 RM					=	rm -rf
 AR					=	ar rcs
@@ -32,18 +32,14 @@ DEPENDENCIES =\
 
 .PHONY:		all
 all:
-			$(MAKE_MINILIBX)
 			$(MAKE) $(NAME)
 
-test:	$(OBJS_TEST)
-	$(CC) $(FLAGS) $(INCLUDES) $(OBJS_TEST) -o $(NAME)
 
 $(NAME):	$(OBJS)
 	$(CC) $(FLAGS) $(INCLUDES) $(OBJS) -o $(NAME)
 
 .PHONY:	clean
 clean:
-			$(MAKE_MINILIBX) clean
 			$(RM) $(DIR_BUILD)
 	
 .PHONY:	fclean

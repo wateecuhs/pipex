@@ -1,41 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 13:19:43 by panger            #+#    #+#             */
-/*   Updated: 2023/11/27 17:34:33 by panger           ###   ########.fr       */
+/*   Created: 2023/11/07 09:13:39 by panger            #+#    #+#             */
+/*   Updated: 2023/11/27 17:34:35 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char *ft_strjoin(char *s1, char *s2)
+char	*ft_substr(char *s, unsigned int start, size_t len)
 {
-	int		i;
-	int		j;
-	char	*str;
+	unsigned int	i;
+	size_t			src_len;
+	char			*ret;
 
-	if (!s1 && !s2)
-		return (NULL);
-	if (!s1)
-		return (ft_strdup(s2));
-	if (!s2)
-		return (ft_strdup(s1));
-	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!str)
+	src_len = 0;
+	while (s[src_len])
+		src_len++;
+	if (start > src_len)
+	{
+		len = 0;
+		start = 0;
+	}
+	if (src_len - start < len)
+		len = src_len - start;
+	ret = (char *)malloc(sizeof(char) * (len + 1));
+	if (!ret)
 		return (NULL);
 	i = 0;
-	while (s1[i])
+	while (s[start + i] && i < len)
 	{
-		str[i] = s1[i];
+		ret[i] = s[start + i];
 		i++;
 	}
-	j = 0;
-	while (s2[j])
-		str[i++] = s2[j++];
-	str[i] = '\0';
-	return (str);
+	ret[i] = '\0';
+	return (ret);
 }

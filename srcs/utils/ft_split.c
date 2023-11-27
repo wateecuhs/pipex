@@ -3,60 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: panger <panger@student.42lyon.fr>          +#+  +:+       +#+        */
+/*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:26:33 by panger            #+#    #+#             */
-/*   Updated: 2023/11/24 13:31:28 by panger           ###   ########.fr       */
+/*   Updated: 2023/11/27 17:34:28 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	is_space(char c)
+static void	free_tab(char **tab, int k)
 {
-	if (c == ' ' || (c >= 9 && c <= 13))
-		return (0);
-	return (1);
-}
-
-static char	*ft_strdupset(char const *s, int start, int stop)
-{
-	char			*trg;
-	unsigned int	count;
-	int				i;
+	int i;
 
 	i = 0;
-	count = 0;
-	while (s[count])
-		count++;
-	trg = (char *)malloc((stop - start + 1) * sizeof(char));
-	if (!trg)
-		return (NULL);
-	while (s[start] && start < stop)
-	{
-		trg[i] = s[start];
-		i++;
-		start++;
-	}
-	trg[i] = '\0';
-	return (trg);
+	while (i < k)
+		free(tab[i++]);
+	free(tab);
 }
 
-static unsigned int	next_charset(char const *s, int i)
+static unsigned int	in_charset(char c, char *charset)
 {
+	int	j;
+
+	j = 0;
+	while (charset[j])
+	{
+		if (charset[j] == c)
+		{
+			return (1);
+		}
+		j++;
+	}
+	return (0);
+}
+
+unsigned int	next_charset(char *str, char *charset, int i)
+{
+	int	j;
 	int	k;
 
 	k = i;
-	while (s[k])
+	while (str[k])
 	{
-		if (is_space(s[k]) == 0)
-			return (k);
+		j = 0;
+		while (charset[j])
+		{
+			if (str[k] == charset[j])
+				return (k);
+			j++;
+		}
 		k++;
 	}
 	return (k);
 }
 
-static unsigned int	count_words(char const *s)
+static unsigned int	count_words(char *s, char *c)
 {
 	int	i;
 	int	count;
@@ -65,34 +67,35 @@ static unsigned int	count_words(char const *s)
 	count = 0;
 	while (s[i])
 	{
-		if ((is_space(s[i + 1] == 0) || s[i + 1] == '\0') && (is_space(s[i + 1]) == 1))
+		if ((in_charset(s[i + 1], c) == 1 || s[i + 1] == '\0')
+			&& in_charset(s[i], c) == 0)
 			count++;
 		i++;
 	}
 	return (count);
 }
 
-char	**ft_split(char const *s)
+char	**ft_split(char *s, char *c)
 {
 	char			**tab;
 	unsigned int	i;
 	unsigned int	k;
-	unsigned int	count;
 
 	i = 0;
 	k = 0;
 	if (!s)
 		return (NULL);
-	count = count_words(s);
-	tab = (char **)malloc((count + 1) * sizeof(char *));
+	tab = (char **)malloc((count_words(s, c) + 1) * sizeof(char *));
 	if (tab == NULL)
 		return (NULL);
 	while (s[i])
 	{
-		if (is_space(s[i]) == 1)
+		if (in_charset(s[i], c) == 0)
 		{
-			tab[k++] = ft_strdupset(s, i, next_charset(s, i));
-			i = next_charset(s, i);
+			tab[k++] = ft_substr(s, i, next_charset(s, c, i) - i);
+			if (!tab[k - 1])
+				return (free_tab(tab, k - 1), NULL);
+			i = next_charset(s, c, i);
 		}
 		if (s[i])
 			i++;
