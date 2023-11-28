@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 11:49:56 by panger            #+#    #+#             */
-/*   Updated: 2023/11/28 15:49:32 by panger           ###   ########.fr       */
+/*   Created: 2023/11/08 11:59:02 by panger            #+#    #+#             */
+/*   Updated: 2023/11/28 15:28:08 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	main(int argc, char **argv, char **env)
+int	ft_putstr(char *s, int *count)
 {
-	int	status;
+	int	i;
 
-	if (argc != 5)
-		program_failure(1);
-	else
+	if (!s)
 	{
-		status = command_receiver(&argv[1], env, argc - 1);
-		return (status);
+		if (write(1, "(null)", 6) == -1)
+			return (-1);
+		*count += 6;
+		return (1);
 	}
-	return (0);
+	i = 0;
+	while (s[i])
+	{
+		if (write(1, &s[i], 1) == -1)
+			return (-1);
+		*count += 1;
+		i++;
+	}
+	return (1);
 }
