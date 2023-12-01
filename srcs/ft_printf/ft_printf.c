@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 11:40:07 by panger            #+#    #+#             */
-/*   Updated: 2023/11/28 15:27:58 by panger           ###   ########.fr       */
+/*   Updated: 2023/11/29 11:06:09 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	reading_loop(const char *str, va_list args, int *count)
 		}
 		else
 		{
-			if (write(1, &str[i], 1) == -1)
+			if (write(2, &str[i], 1) == -1)
 				return (-1);
 			*count += 1;
 		}

@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:51:48 by panger            #+#    #+#             */
-/*   Updated: 2023/11/28 15:28:03 by panger           ###   ########.fr       */
+/*   Updated: 2023/11/29 11:05:44 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_putchar(int c, int *count)
 {
-	if (write(1, &c, 1) == -1)
+	if (write(2, &c, 1) == -1)
 		return (-1);
 	*count += 1;
 	return (1);

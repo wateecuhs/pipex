@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 14:23:00 by panger            #+#    #+#             */
-/*   Updated: 2023/11/28 15:28:02 by panger           ###   ########.fr       */
+/*   Updated: 2023/11/29 11:06:04 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_putadr_hexa(unsigned long adr, int *count)
 
 	if (!adr)
 	{
-		if (write(1, "(nil)", 5) == -1)
+		if (write(2, "(nil)", 5) == -1)
 			return (-1);
 		*count += 5;
 		return (1);
@@ -46,7 +46,7 @@ int	ft_putadr_hexa(unsigned long adr, int *count)
 		adr = adr / 16;
 	}
 	tab[i] = base[adr % 16];
-	if (write(1, "0x", 2) == -1 || write(1, &tab[i], -(i - 16)) == -1)
+	if (write(2, "0x", 2) == -1 || write(2, &tab[i], -(i - 16)) == -1)
 		return (-1);
 	*count += 2 + (-(i - 16));
 	return (1);

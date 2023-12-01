@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 12:17:11 by panger            #+#    #+#             */
-/*   Updated: 2023/11/28 15:41:23 by panger           ###   ########.fr       */
+/*   Created: 2023/11/29 11:29:31 by panger            #+#    #+#             */
+/*   Updated: 2023/11/29 15:21:17 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-
-int	program_failure(int error_type)
+int	ft_strcmp(char *s1, char *s2)
 {
-	// ptr_sur_fonction[] = {&invalid_param, &file_error, &cmd_error}
+	int	i;
 
-	// (ptr)[error_type];
-	if (error_type == 1)
-		write(2, "Invalid parameters.\n", 21);
-	if (error_type == 2)
-		write(2, "Couldn't access the given files.\n", 34);
-	if (error_type == 3)
-		write(2, "Command not found.\n", 20); 
-	exit(EXIT_FAILURE);
+	i = 0;
+	while (s1[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
+}
+
+int	ft_strcmp_hd(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && s1[i] == s2[i])
+		i++;
+	if (s1[i] == '\n' && s1[i +1] == '\0' && s2[i] == '\0')
+		return (0);
+	return (s1[i] - s2[i]);
 }

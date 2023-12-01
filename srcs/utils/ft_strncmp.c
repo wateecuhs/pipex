@@ -6,18 +6,18 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:23:56 by panger            #+#    #+#             */
-/*   Updated: 2023/11/27 16:26:33 by panger           ###   ########.fr       */
+/*   Updated: 2023/11/29 15:21:22 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_strncmp(char *s1, char *s2, int n)
+int	ft_strncmp(char *s1, char *s2, int n)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (s1[i] && s1[i] == s2[i] && i < n)
-        i++;
-    if (i == n)
-        return (0);
-    return (s1[i] - s2[i]);
+	i = 0;
+	while (s1[i] && s1[i] == s2[i] && i < n)
+		i++;
+	if (i == n)
+		return (0);
+	return (s1[i] - s2[i]);
 }

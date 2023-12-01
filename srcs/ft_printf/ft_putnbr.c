@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 14:00:56 by panger            #+#    #+#             */
-/*   Updated: 2023/11/28 15:28:06 by panger           ###   ########.fr       */
+/*   Updated: 2023/11/29 11:05:56 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	ft_putnbr(int nb, int *count)
 {
 	if (nb == -2147483648)
 	{
-		if (write(1, "-2147483648", 11) == -1)
+		if (write(2, "-2147483648", 11) == -1)
 			return (-1);
 		*count += 11;
 		return (1);
@@ -82,7 +82,7 @@ int	ft_putstr_hexa(int n, int caps, int *count)
 		tab[i] = base2[((unsigned int)n) % 16];
 	else
 		tab[i] = base[((unsigned int)n) % 16];
-	if (write(1, &tab[i], -(i - 16)) == -1)
+	if (write(2, &tab[i], -(i - 16)) == -1)
 		return (-1);
 	*count += -(i - 16);
 	return (1);

@@ -6,13 +6,13 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:19:43 by panger            #+#    #+#             */
-/*   Updated: 2023/11/27 17:34:33 by panger           ###   ########.fr       */
+/*   Updated: 2023/11/29 11:18:22 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char *ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
 	int		j;

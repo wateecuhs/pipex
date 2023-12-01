@@ -6,16 +6,18 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:11:54 by panger            #+#    #+#             */
-/*   Updated: 2023/11/27 17:34:22 by panger           ###   ########.fr       */
+/*   Updated: 2023/11/29 11:17:35 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char    **get_paths(char **env)
+char	**get_paths(char **env)
 {
-    char **paths;
-    int i = 0;
+	char	**paths;
+	int		i;
+
+	i = 0;
 	while (env[i])
 	{
 		if (ft_strncmp(env[i], "PATH=", 5) == 0)
@@ -24,5 +26,5 @@ char    **get_paths(char **env)
 		}
 		i++;
 	}
-    return (paths);
+	return (paths);
 }

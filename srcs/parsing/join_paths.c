@@ -6,18 +6,18 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 17:19:29 by panger            #+#    #+#             */
-/*   Updated: 2023/11/28 12:31:20 by panger           ###   ########.fr       */
+/*   Updated: 2023/11/29 11:17:56 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char    *join_paths(char *s1, char *s2)
+char	*join_paths(char *s1, char *s2)
 {
-	char    *ret;
-	char    *temp;
-	char    *temp2;
-	int     i;
+	char	*ret;
+	char	*temp;
+	char	*temp2;
+	int		i;
 
 	temp2 = ft_strjoin(s1, "/");
 	temp = ft_strdup(s2);
