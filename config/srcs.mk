@@ -1,9 +1,10 @@
 SRCS= 			pipex.c \
 				$(SRCS_UTILS) \
 				$(SRCS_PARSING) \
-				$(SRCS_EXEC) \
+				$(SRCS_HANDLING) \
 				$(SRCS_PRINTF) \
-				$(SRCS_GNL)
+				$(SRCS_GNL) \
+				$(SRCS_ERRORS)
 
 SRCS_UTILS=		utils/ft_split.c \
 				utils/ft_strlen.c \
@@ -18,9 +19,10 @@ SRCS_PARSING=	parsing/get_paths.c \
 				parsing/join_paths.c \
 				parsing/params_checking.c
 
-SRCS_EXEC=		exec/commands_handler.c \
-				exec/here_doc_handler.c \
-				exec/here_doc_utils.c
+SRCS_HANDLING=	handling/commands_handler.c \
+				handling/fd_handler.c
+
+SRCS_ERRORS=	errors/errors.c
 
 SRCS_PRINTF=	ft_printf/ft_printf.c \
 				ft_printf/ft_putadr_hex.c \

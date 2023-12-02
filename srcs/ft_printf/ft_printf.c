@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 11:40:07 by panger            #+#    #+#             */
-/*   Updated: 2023/11/29 11:06:09 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/02 14:29:56 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,10 @@ int	ft_printf(const char *str, ...)
 		return (-1);
 	va_start(ptr, str);
 	if (reading_loop(str, ptr, &count) == -1)
-		return (-1);
+	{
+		va_end(ptr);
+		exit(EXIT_FAILURE);
+	}
 	va_end(ptr);
 	return (count);
 }
