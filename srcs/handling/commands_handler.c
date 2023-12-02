@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 17:29:27 by panger            #+#    #+#             */
-/*   Updated: 2023/12/02 14:28:56 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/02 14:37:57 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,56 +96,12 @@ int	command_receiver(int nb_cmd, char **cmds, char **env, int *fd_in_and_out)
 		if (i == 0)
 			set_fd_to_use(fds, fd_in_and_out[IN], fds[WRITE]);
 		else if (i == nb_cmd - 1)
-			set_fd_to_use(fds, fds[3], fd_in_and_out[OUT]);
+			set_fd_to_use(fds, fds[2 + IN], fd_in_and_out[OUT]);
 		else
-			set_fd_to_use(fds, fds[3], fds[2]);
-		pid[i] = fork_exec(cmds[i],  fds, env, pid);
+			set_fd_to_use(fds, fds[2 + IN], fds[2 + OUT]);
+		pid[i] = fork_exec(cmds[i], fds, env, pid);
 		parent_process(&fds[2], fds);
 	}
 	i = wait_pids(pid, nb_cmd);
 	return (i);
 }
-/* 
-int	fork_exec(char *cmd, int *fd_to_use, int *p, char **env)
-{
-	int	pid;
-
-	pid = fork();
-	if (pid == -1)
-		error_msg(NULL);
-	if (pid == 0)
-	{
-		close(p[READ]);
-		command_exec(cmd, fd_to_use, env);
-	}
-	return (pid);
-} */
-
-/* 
-int	command_receiver(int nb_cmd, char **cmds, char **env, int *fd_in_and_out)
-{
-	int	p[2];
-	int	fd_to_use[2];
-	int	*pid;
-	int	i;
-
-	i = -1;
-	pid = (int *)malloc(sizeof(int) * nb_cmd);
-	if (!pid)
-		error_msg("malloc");
-	while (++i < nb_cmd)
-	{
-		if (pipe(p) == -1)
-			error_msg(NULL);
-		if (i == 0)
-			set_fd_to_use(fd_to_use, fd_in_and_out[IN], p[WRITE]);
-		else if (i == nb_cmd - 1)
-			set_fd_to_use(fd_to_use, fd_to_use[IN], fd_in_and_out[OUT]);
-		else
-			set_fd_to_use(fd_to_use, fd_to_use[IN], p[WRITE]);
-		pid[i] = fork_exec(cmds[i], fd_to_use, p, env);
-		parent_process(fd_to_use, p);
-	}
-	i = wait_pids(pid, nb_cmd);
-	return (i);
-} */

@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 13:06:51 by panger            #+#    #+#             */
-/*   Updated: 2023/12/02 14:21:45 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/02 14:37:55 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	*set_fd_heredoc(int *fd_in_out, char *limiter, char *outfile)
 	while (ft_strcmp_hd(string, limiter) != 0 && string != NULL)
 	{
 		if (write(p[WRITE], string, ft_strlen(string)) == -1)
-			printf("pipex: write error: %s\n", strerror(errno));
+			ft_printf("pipex: write error: %s\n", strerror(errno));
 		string = get_next_line(0);
 	}
 	close(p[WRITE]);
