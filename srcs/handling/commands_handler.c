@@ -6,7 +6,7 @@
 /*   By: panger <panger@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 17:29:27 by panger            #+#    #+#             */
-/*   Updated: 2023/12/02 14:37:57 by panger           ###   ########.fr       */
+/*   Updated: 2023/12/05 14:42:10 by panger           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	command_exec(char *cmd, int fd[2], char **env)
 	if (!path)
 	{
 		freetab(args);
-		free(path);
 		ft_printf("pipex: command not found: %s\n", cmd);
 		exit(EXIT_FAILURE);
 	}
